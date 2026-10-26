@@ -1,6 +1,6 @@
 ---
 name: public-repo-launch-page
-description: Build and publish a one-page launch site for a public project on GitHub Pages, from a site/ folder in the same repo, with a direct download of the latest release, a one-prompt install for coding agents, and short clips of the real app. Part of the public-repo skill; load it from there when a public project needs a launch page, a release download, new showcase clips, or a check that the live page still matches the app.
+description: Build and publish a one-page launch site for a public project on GitHub Pages, from a site/ folder in the same repo, with a direct download of the latest release, a one-prompt install for coding agents, short clips of the real app, and a changelog with brief points and a picture per release. Part of the public-repo skill; load it from there when a public project needs a launch page, a release download, new showcase clips, a changelog entry, or a check that the live page still matches the app.
 ---
 
 # Launch page on GitHub Pages
@@ -58,7 +58,7 @@ These came from a real launch. Each has its reason. Change one only when the own
 
 - **Link straight to the file:** `https://github.com/<owner>/<repo>/releases/latest/download/<asset>.zip`,
   with the `download` attribute. The file downloads at once, with no stop on the GitHub release page, and the
-  link follows each new release. Put a small "Release notes" link to `/releases/latest` beside it.
+  link follows each new release. Put a small "What's new" link to the page's changelog beside it.
 - **Keep the asset name the same in every release** (for example `<name>-windows.zip`). A version number in
   the name breaks the `latest/download` link.
 - **Build the release from tracked files only:** a workflow on `v*` tags that runs
@@ -66,8 +66,9 @@ These came from a real launch. Each has its reason. Change one only when the own
   holds exactly what the scanner checked; ignored overlay files cannot get in.
 - **The link returns 404 until the first release exists.** Publish the first release before, or together
   with, the page.
-- **Release after every user-facing change.** Bump each place that shows the version, commit, scan, then
-  push the tag. Otherwise the page shows the new app and the download gives the old one.
+- **Release after every user-facing change.** Bump each place that shows the version, add the release's
+  changelog entry (see below), commit, scan, then push the tag. Otherwise the page shows the new app and the
+  download gives the old one.
 
 ### Install
 
@@ -107,7 +108,33 @@ These came from a real launch. Each has its reason. Change one only when the own
   the crop shows.
 - **Keep a list of every place that shows the app:** the page's clips and posters, the feature crops, the
   README image, the `og:image` and any GIFs. When the UI changes, redo all of them in one change, with the same recorder and
-  demo data.
+  demo data. Changelog pictures are the exception: each shows the app as it was at its release, so leave
+  them.
+
+### Changelog
+
+The owner's rule: every launch page has a changelog, with brief points and pictures rather than text alone.
+
+- **A "What's new" section** (`id="changelog"`) after the install section, linked from the nav and from the
+  download card. Newest first. One entry per release, with the version linking to its GitHub release and the
+  date. A project without version tags gets one entry per dated, shipped change, named in a few words
+  ("Install with one prompt", "First public release"). End with a link to every release (or the commit
+  history) on GitHub.
+- **One to four brief points per entry**, in the visitor's words: what they can now do or what now works
+  ("Dictations paste every time"), not commit subjects or file names. Name a fixed problem by its symptom.
+- **Only what that release shipped.** Read the commits in the tag range (`git log <previous>..<tag>`) and
+  check the release's tree. A feature in an open pull request, or described in the README but missing from the
+  code, gets no point until it ships.
+- **A picture with every entry**, under its points, with the same treatment as the feature crops: a cropped
+  capture of the part of the app that changed, taken from the demo-data window at 2x by a script, saved as
+  WebP, with `width`, `height`, `loading="lazy"` and alt text. When the change has no screen of its own (a fix
+  in the background), show the screen that reports it (for example a stats row that counts the corrections).
+  For a terminal app, use a real asset (its startup banner) or a picture drawn in HTML from the app's own
+  strings (its prompts, labels and checks), as the page's other pictures do. Reuse an image from elsewhere on
+  the page only for the first release.
+- **Same layout as the features:** the version and date in the left column, the points and the picture in
+  the right; one column on phones. The points span their column ("Text spans its section").
+- **Add the entry in the release commit**, so the page and the download change together.
 
 ### Page basics
 
@@ -136,7 +163,9 @@ local files:
 3. The download link fetches the latest release's asset. Download it and check that it holds the current
    version (its version string and a file changed in the latest release).
 4. The copy button puts the full prompt on the clipboard.
-5. The scanner prints `clean` (root skill), and you looked at every new image and clip.
+5. The changelog's newest entry is the release that `latest/download` serves, every entry has a picture that
+   loads, and no point describes something that release did not ship.
+6. The scanner prints `clean` (root skill), and you looked at every new image and clip.
 
 ## Known pitfalls
 
@@ -155,6 +184,10 @@ From a real launch:
 - **The numbered features were text only.** The owner asked for each one to show the matching part of the app.
 - **The setup prompt's guide only linked to release pages.** An agent would have had to browse for the right
   files. The guide was rewritten with exact download and unzip commands.
+- **No changelog.** Visitors could not tell what had changed between releases. The owner asked for one on
+  every launch page, with brief points and pictures.
+- **A first-release entry nearly claimed a feature that had not shipped.** The README described it, but the
+  code arrived in a later, still-open pull request. Checking the release's tree caught it.
 
 ## Done when
 
@@ -168,6 +201,7 @@ From a real launch:
 Launch page: https://<owner>.github.io/<repo>/ (deployed <commit>)
 Download: <asset> from release <tag>, checked: <version and file seen>
 Checks: desktop and phone, no errors / <what failed>
+Changelog: newest entry <version or name, date>, <n> entries, each with a picture
 Showcase redone: <clips, posters, README image, og:image, GIFs>
 Still to do: <DNS, first release, owner decisions>
 ```

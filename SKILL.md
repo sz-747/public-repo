@@ -1,6 +1,6 @@
 ---
 name: public-repo
-description: Open-source a project or an agent skill as a public GitHub repository with nothing private in its files, file names, history, commit identities or settings, working on its own from a fresh clone, and keep it clean on every later push. Use when asked to make a repo public, open-source a project or app, publish a skill (or a set of skills) as its own repo, or check a repo before pushing it somewhere public. Also covers the public project's README (logo and app image at the top) and its GitHub Pages launch page with a direct download of the latest release.
+description: Open-source a project or an agent skill as a public GitHub repository with nothing private in its files, file names, history, commit identities or settings, working on its own from a fresh clone, and keep it clean on every later push. Use when asked to make a repo public, open-source a project or app, publish a skill (or a set of skills) as its own repo, or check a repo before pushing it somewhere public. Also covers the public project's README (logo and app image at the top) and its GitHub Pages launch page with a direct download of the latest release and a changelog with pictures.
 ---
 
 # Public repo
@@ -88,7 +88,7 @@ Parts of this skill, each with its own goal, decisions and done-when. Load one w
 | Part | Load it when |
 |---|---|
 | [`skills/readme.md`](skills/readme.md) | A public project needs its README written or checked: logo, name, pitch and an image of the real app at the top, then the body; or the app's UI changed and its image must be retaken. |
-| [`skills/launch-page.md`](skills/launch-page.md) | A public project needs a launch page on GitHub Pages, a release download, showcase clips, or a check that the live page still matches the app. |
+| [`skills/launch-page.md`](skills/launch-page.md) | A public project needs a launch page on GitHub Pages, a release download, showcase clips, a changelog entry for a release, or a check that the live page still matches the app. |
 
 GitHub CLI (`gh`) creates and inspects the repo. GitHub's own secret scanning and push protection on public
 repos are a second net, not a replacement for the scan.
@@ -163,7 +163,8 @@ attribution notices concise and visible.
   explicitly labeled setup section at the bottom. For a project with a logo or a UI, it opens with the logo,
   the name, a one-line pitch and an image of the real app ([`skills/readme.md`](skills/readme.md)).
 - Optional, with the owner's yes: a launch page on GitHub Pages and a first release for its download button
-  ([`skills/launch-page.md`](skills/launch-page.md)).
+  ([`skills/launch-page.md`](skills/launch-page.md)). The page carries a changelog, brief points and a picture
+  per release, updated with every release.
 - Fresh-clone check: clone, install from the lockfile, run the tests or start it with only `.env.example`
   values. Name anything that needs a real account (a database, an API key) in the installation guide.
 
