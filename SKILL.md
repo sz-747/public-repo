@@ -125,6 +125,26 @@ rotated at its provider. Deleting it is not enough; clones, forks and caches kee
    the private source of truth and the public copy in step. Optionally add a local `.git/hooks/pre-push` that
    runs the scanner.
 
+### README for humans
+
+Apply this contract to every public project and skill repository. A nontechnical reader should be able to
+skim the README and immediately understand the subject and why they would use it. Keep the main body to:
+
+- **What it is:** a short, plain description of the thing being shared.
+- **What it is used for:** concrete use cases, with a small example when it helps.
+- **Evidence, when available:** demonstrated results, tests or measurements, with their limits. Omit this
+  when there is no evidence; do not invent validation or imply broader proof than the checks establish.
+- **How it is designed:** a couple of sentences and a simple diagram are usually enough. Technical detail
+  is fine here when it helps explain the design. A separate architecture document, heading or rigid template
+  is not required.
+
+Move installation, dependency commands, configuration, authentication, running and testing instructions to
+an agent-facing Markdown guide such as `INSTALL.md`. Link it once at the bottom with an unmistakable label,
+for example **[AGENTS: READ THIS TO INSTALL](INSTALL.md)**. If setup must stay in the README, keep it in a
+clearly labeled agent-only section at the bottom, after the human overview. Do not make humans read npm,
+shell commands or lengthy setup details before they understand the project. Keep required license and
+attribution notices concise and visible.
+
 ### Open-sourcing a project
 
 - Real data replaced: seed files, fixtures, screenshots and sample CSVs use fictional people and values.
@@ -132,9 +152,10 @@ rotated at its provider. Deleting it is not enough; clones, forks and caches kee
   overlay; no `.vercel/`, `.netlify/` or other files that link to the owner's hosting accounts; no region,
   project or team IDs that only fit them.
 - De-branded where the owner asked: product name, cookie and storage names, domains, logos, redirects.
-- A README that says what it is, how to install, configure, run and test it, in that order.
+- A human-facing README following the contract above, with a linked agent installation guide or an
+  explicitly labeled setup section at the bottom.
 - Fresh-clone check: clone, install from the lockfile, run the tests or start it with only `.env.example`
-  values. Name anything that needs a real account (a database, an API key) in the README.
+  values. Name anything that needs a real account (a database, an API key) in the installation guide.
 
 ### Open-sourcing a skill
 
@@ -148,9 +169,8 @@ rotated at its provider. Deleting it is not enough; clones, forks and caches kee
   commands and tests run from the repo root, not from the private collection's root, and do not import from
   folders outside the repo.
 - Provenance: if the skill was adapted from someone else's, keep their licence and credit them in the README.
-- A short README: what the skill does, how to install it (clone or copy the folder into
-  `~/.claude/skills/<name>/` for Claude Code, `~/.agents/skills/<name>/` or the project's skills folder for
-  Codex and other agents), and how to run its tests.
+- A short human-facing README following the contract above. The linked agent guide explains installation
+  into the client's supported skills directory, required configuration, the entry point, and offline checks.
 - Fresh-clone check: the scanner reports no broken links or wikilinks; the skill's tests pass when run from
   the clone root; a reader with only the clone can follow `SKILL.md` without anything from the owner's machine.
 
@@ -177,6 +197,8 @@ From real releases:
 - The manual review list above was gone through, and anything not checked is named in the report.
 - Any secret that was ever exposed has been rotated, or the report says it still needs rotating.
 - The repo's visibility, branches and description match what the owner agreed.
+- The README is skimmable by a nontechnical reader: purpose, use cases, available evidence, and a brief
+  design explanation. Installation is one clear link or a labeled agent section at the bottom.
 
 ## Output
 
