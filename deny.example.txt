@@ -1,0 +1,13 @@
+# Example private deny list for scripts/scan_public.py.
+# Copy to ~/.config/public-repo/deny.txt (or point PUBLIC_REPO_DENY at your copy) and replace every line with
+# your own values. Never commit the real file: it lists exactly what must stay out of public repos.
+# One case-insensitive regular expression per line; text after " #" is a comment.
+
+your-full-name                 # your name as it appears in docs and commit trailers
+your-handle                    # usernames on GitHub, chat, socials
+you@your-email\.com            # personal and work email addresses
+your-company                   # employer, school, clients
+your-team-slug                 # hosting team or project names
+[a-z0-9-]+\.your-domain\.com   # private subdomains and preview hosts
+ADMIN-[A-Z0-9]{4}              # format of admin or event codes you use
+your-private-notes-repo        # private repos and folders a public copy must not mention
