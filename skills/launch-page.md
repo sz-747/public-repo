@@ -115,11 +115,14 @@ These came from a real launch. Each has its reason. Change one only when the own
 
 The owner's rule: every launch page has a changelog, with brief points and pictures rather than text alone.
 
-- **A "What's new" section** (`id="changelog"`) after the install section, linked from the nav and from the
-  download card. Newest first. One entry per release, with the version linking to its GitHub release and the
-  date. A project without version tags gets one entry per dated, shipped change, named in a few words
-  ("Install with one prompt", "First public release"). End with a link to every release (or the commit
-  history) on GitHub.
+- **Its own page, `site/changelog.html`**, titled "What's new", never a section of the home page (the owner's
+  rule: the home page ends with its install section). It reuses `style.css`, the same nav (links point back to
+  `index.html#how` and `index.html#install`; the brand links to `index.html`; the Changelog link carries
+  `aria-current="page"`) and the same footer, and has its own `<title>`, description and `og:` tags. Link to it
+  as "Changelog" in the nav and "What's new" beside the download.
+- **Newest first.** One entry per release, with the version linking to its GitHub release and the date. A
+  project without version tags gets one entry per dated, shipped change, named in a few words ("Install with
+  one prompt", "First public release"). End with a link to every release (or the commit history) on GitHub.
 - **One to four brief points per entry**, in the visitor's words: what they can now do or what now works
   ("Dictations paste every time"), not commit subjects or file names. Name a fixed problem by its symptom.
 - **Only what that release shipped.** Read the commits in the tag range (`git log <previous>..<tag>`) and
@@ -147,6 +150,10 @@ The owner's rule: every launch page has a changelog, with brief points and pictu
   same section are wider. The paragraph then wraps early and leaves an empty band to its right. Limit line
   length by narrowing the whole section instead. Centred captions under a centred frame are the exception. At
   1280 px wide, look at every paragraph: if one stops short of the content under it, remove its `max-width`.
+- **How each page ends** (the owner's rule): the home page's last section is the install section ("Get
+  <Name>"), with nothing after it but a small, centred "Back to top ↑" link and then the footer. Every other
+  page (the changelog) ends with the same link. Put `id="top"` on `<body>`, not on `<main>`: under a sticky
+  nav, `<main>` starts below the bar, so the link would stop short of the top. Check it scrolls to 0.
 - Footer: the licence, credits for upstream projects, and the repo link.
 - Every claim on the page (privacy, "runs offline", supported systems, download size) matches the README and
   the code.
@@ -163,8 +170,10 @@ local files:
 3. The download link fetches the latest release's asset. Download it and check that it holds the current
    version (its version string and a file changed in the latest release).
 4. The copy button puts the full prompt on the clipboard.
-5. The changelog's newest entry is the release that `latest/download` serves, every entry has a picture that
-   loads, and no point describes something that release did not ship.
+5. The changelog page loads from the nav and the download card; its newest entry is the release that
+   `latest/download` serves, every entry has a picture that loads, and no point describes something that
+   release did not ship. The home page ends with the install section, and "Back to top" on both pages
+   scrolls to 0.
 6. The scanner prints `clean` (root skill), and you looked at every new image and clip.
 
 ## Known pitfalls
@@ -186,6 +195,10 @@ From a real launch:
   files. The guide was rewritten with exact download and unzip commands.
 - **No changelog.** Visitors could not tell what had changed between releases. The owner asked for one on
   every launch page, with brief points and pictures.
+- **The changelog went on the home page, after the install section.** The owner moved it to its own page so
+  the home page ends with "Get <Name>" and a back-to-top link.
+- **"Back to top" stopped about 70 px short** because `id="top"` was on `<main>`, under the sticky nav.
+  Moving the id to `<body>` fixed it.
 - **A first-release entry nearly claimed a feature that had not shipped.** The README described it, but the
   code arrived in a later, still-open pull request. Checking the release's tree caught it.
 
@@ -201,7 +214,7 @@ From a real launch:
 Launch page: https://<owner>.github.io/<repo>/ (deployed <commit>)
 Download: <asset> from release <tag>, checked: <version and file seen>
 Checks: desktop and phone, no errors / <what failed>
-Changelog: newest entry <version or name, date>, <n> entries, each with a picture
+Changelog: <url>/changelog.html, newest entry <version or name, date>, <n> entries, each with a picture
 Showcase redone: <clips, posters, README image, og:image, GIFs>
 Still to do: <DNS, first release, owner decisions>
 ```

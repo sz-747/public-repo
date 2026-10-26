@@ -163,8 +163,9 @@ attribution notices concise and visible.
   explicitly labeled setup section at the bottom. For a project with a logo or a UI, it opens with the logo,
   the name, a one-line pitch and an image of the real app ([`skills/readme.md`](skills/readme.md)).
 - Optional, with the owner's yes: a launch page on GitHub Pages and a first release for its download button
-  ([`skills/launch-page.md`](skills/launch-page.md)). The page carries a changelog, brief points and a picture
-  per release, updated with every release.
+  ([`skills/launch-page.md`](skills/launch-page.md)). It has a separate changelog page (brief points and a
+  picture per release, updated with every release), and the home page ends with the install section and a
+  back-to-top link.
 - Fresh-clone check: clone, install from the lockfile, run the tests or start it with only `.env.example`
   values. Name anything that needs a real account (a database, an API key) in the installation guide.
 
