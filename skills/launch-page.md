@@ -99,8 +99,14 @@ These came from a real launch. Each has its reason. Change one only when the own
 - **An optional live demo in the hero** that shows the core action in a few seconds. It plays on its own,
   and a visitor can also try it (for example by holding a key or pressing the demo on touch screens). Any
   key handler skips text fields, buttons and links.
-- **Keep a list of every place that shows the app:** the page's clips and posters, the README image, the
-  `og:image` and any GIFs. When the UI changes, redo all of them in one change, with the same recorder and
+- **Pair every feature claim with the part of the app it describes** (the owner's request). Each numbered
+  feature or highlight gets a cropped capture of the matching screen under its text: the main screen while it
+  works, the setting that controls the feature, the list it fills, the stats it reports. A reader then sees
+  the feature, not only reads about it. Crop from the same demo-data window at 2x resolution with a script, and
+  save as WebP (about 20 to 40 KB each), with `width`, `height`, `loading="lazy"` and alt text that says what
+  the crop shows.
+- **Keep a list of every place that shows the app:** the page's clips and posters, the feature crops, the
+  README image, the `og:image` and any GIFs. When the UI changes, redo all of them in one change, with the same recorder and
   demo data.
 
 ### Page basics
@@ -108,6 +114,12 @@ These came from a real launch. Each has its reason. Change one only when the own
 - `<title>` and meta description; `og:title`, `og:description` and an absolute `og:image` (the README image);
   `theme-color`; the logo as favicon and in the header and footer.
 - Works at phone width: no horizontal scroll at 390 px wide. Desktop and phone get the same content.
+- **Text spans its section** (the owner's rule; agents get this wrong often). A paragraph under a section
+  title, or beside an image or a card grid, is as wide as the content it belongs to. Do not give a lede or a
+  feature paragraph its own narrow `max-width` (such as 560 or 640 px) when the cards, images or grid in the
+  same section are wider. The paragraph then wraps early and leaves an empty band to its right. Limit line
+  length by narrowing the whole section instead. Centred captions under a centred frame are the exception. At
+  1280 px wide, look at every paragraph: if one stops short of the content under it, remove its `max-width`.
 - Footer: the licence, credits for upstream projects, and the repo link.
 - Every claim on the page (privacy, "runs offline", supported systems, download size) matches the README and
   the code.
@@ -119,8 +131,8 @@ local files:
 
 1. The page returns 200 with the expected `<title>`, and its assets load.
 2. In a real browser at 1280 px and 390 px wide: no console errors and no horizontal scroll; the clips play,
-   tabs switch clips and captions, and a clip moves on to the next when it ends. Save a screenshot of each
-   width.
+   tabs switch clips and captions, and a clip moves on to the next when it ends; every image loads; no
+   paragraph stops short of the content in its section. Save a screenshot of each width.
 3. The download link fetches the latest release's asset. Download it and check that it holds the current
    version (its version string and a file changed in the latest release).
 4. The copy button puts the full prompt on the clipboard.
@@ -138,6 +150,9 @@ From a real launch:
   `latest/download` still served the release built before it, until a new version was tagged.
 - **The first download link opened the GitHub release page.** The owner wanted the file to download at once,
   so the link was changed to `releases/latest/download/<asset>.zip`.
+- **The install section's one-line lede was capped at 640 px** above a card grid about 950 px wide, so it
+  wrapped into two short lines with empty space beside them. The owner asked for it to span the section.
+- **The numbered features were text only.** The owner asked for each one to show the matching part of the app.
 - **The setup prompt's guide only linked to release pages.** An agent would have had to browse for the right
   files. The guide was rewritten with exact download and unzip commands.
 
